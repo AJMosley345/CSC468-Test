@@ -24,16 +24,12 @@ node1.addService(rspec.Execute(shell="/bin/sh", command='y'))
 node1.addService(rspec.Execute(shell="/bin/sh", command='y'))
 node1.addService(rspec.Execute(shell="/bin/sh", command='y'))
 node1.addService(rspec.Execute(shell="/bin/sh", command='y'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='y'))
 
-# Changing root user password
-node1.addService(rspec.Execute(shell="/bin/sh", command='sudo mysql'))
-node1.addService(rspec.Execute(shell="/bin/sh", command="ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '&cFpmgffmF16jt!nhmQj';"))
-node1.addService(rspec.Execute(shell="/bin/sh", command='FLUSH PRIVILEGES;'))
-node1.addService(rspec.Execute(shell="/bin/sh", command='exit'))
 
 # Creating a default user
 node1.addService(rspec.Execute(shell="/bin/sh", command='sudo mysql -u root -p'))
-node1.addService(rspec.Execute(shell="/bin/sh", command='&cFpmgffmF16jt!nhmQj'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='dfA2%Vf!Z&U12mz3FlW!'))
 node1.addService(rspec.Execute(shell="/bin/sh", command="CREATE USER 'amosley'@'localhost' IDENTIFIED BY 'OQsl*Jcn^MLntHVFn3i2';"))
 node1.addService(rspec.Execute(shell="/bin/sh", command="GRANT ALL PRIVILEGES ON *.* TO 'amosley'@'localhost' WITH GRANT OPTION;"))
 node1.addService(rspec.Execute(shell="/bin/sh", command='exit'))
