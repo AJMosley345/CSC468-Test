@@ -29,7 +29,7 @@ lines = [
     'expect "Remove test database and access to it?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n',
     'expect "Reload privilege tables now?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n'
     ]
-with open('automate_mysql', 'w') as f:
+with open('./automate_mysql', 'w') as f:
     for line in lines:
         f.write(line)
 node1.addService(rspec.Execute(shell="/bin/sh", command='chmod 755 automate_mysql'))
