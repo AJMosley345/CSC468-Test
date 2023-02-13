@@ -18,9 +18,6 @@ node1.addService(rspec.Execute(shell="/bin/sh", command='sudo systemctl status m
 # Configuring mysql-server
 lines = [
     "MYSQL_ROOT_PASSWORD='test@123'\n",
-    'set timeout 10\n',
-    'spawn mysql_secure_installation\n',
-    'expect "Change the password for root ?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n',
     'expect "New password:"\nsend "$MYSQL_ROOT_PASSWORD"\n',
     'expect "Re-enter new password:"\nsend "$MYSQL_ROOT_PASSWORD"\n',
     'expect "Do you wish to continue with the password provided?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n',
@@ -29,9 +26,19 @@ lines = [
     'expect "Remove test database and access to it?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n',
     'expect "Reload privilege tables now?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n'
     ]
-with open('./automate_mysql', 'w') as f:
-    for line in lines:
-        f.write(line)
+
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo "MYSQL_ROOT_PASSWORD="test@123"\n" >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo "set timeout 10\n" >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo "spawn mysql_secure_installation\n" >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "Change the password for root ?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n" >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo '' >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo '' >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo '' >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo '' >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo '' >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo '' >> automate_mysql'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='echo '' >> automate_mysql'))
+
 node1.addService(rspec.Execute(shell="/bin/sh", command='chmod 755 automate_mysql'))
 node1.addService(rspec.Execute(shell="/bin/sh", command='./automate_mysql'))
 
