@@ -4,40 +4,21 @@ import geni.rspec.pg as rspec
 # Create a Request object to start building the RSpec.
 request = portal.context.makeRequestRSpec()
 
-db_server = request.DockerContainer("mongodb")
-db_server.docker_extimage = "mongo"
 
-web_server = request.DockerContainer("nginx")
-web_server.docker_extimage = "nginx"
-portal.context.printRequestRSpec()
 #region
 # Creating the mysql server
-# node1 = request.XenVM("mysql-server")
-# node1.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD"
-# node1.routable_control_ip = "true"
+node1 = request.XenVM("mysql-server")
+node1.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD"
+node1.routable_control_ip = "true"
 
 # # Installs mysql
-# node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt update"))
-# node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y mysql-server "))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='sudo systemctl enable mysql-server'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='sudo systemctl status mysql-server'))
+node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt update"))
+node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y mysql-server "))
+node1.addService(rspec.Execute(shell="/bin/sh", command='sudo systemctl enable mysql-server'))
+node1.addService(rspec.Execute(shell="/bin/sh", command='sudo systemctl status mysql-server'))
 
-# # Configuring mysql-server
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "MYSQL_ROOT_PASSWORD="test@123"\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "set timeout 10\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "spawn mysql_secure_installation\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "Change the password for root ?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "New password:"\nsend "$MYSQL_ROOT_PASSWORD"\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "Re-enter new password:"\nsend "$MYSQL_ROOT_PASSWORD"\n'' >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "Do you wish to continue with the password provided?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "Remove anonymous users?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "Disallow root login remotely?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "Remove test database and access to it?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n" >> automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='echo "expect "Reload privilege tables now?\(Press y\|Y for Yes, any other key for No\) :"\nsend "y"\n" >> automate_mysql'))
-
-# node1.addService(rspec.Execute(shell="/bin/sh", command='chmod 755 automate_mysql'))
-# node1.addService(rspec.Execute(shell="/bin/sh", command='./automate_mysql'))
-
+# Configuring mysql-server
+node1.addService(rspec.Execute(shell="bash", command='/local/repository/setup_mysql.sh'))
 
 # # Creating a default user
 # node1.addService(rspec.Execute(shell="/bin/sh", command='echo "sudo mysql -u root -p" >> create_user'))
@@ -69,6 +50,6 @@ portal.context.printRequestRSpec()
 
 
 # Print the RSpec to the enclosing page.
-#portal.context.printRequestRSpec()
+portal.context.printRequestRSpec()
 #endregion
 
