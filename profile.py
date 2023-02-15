@@ -6,6 +6,7 @@ request = portal.context.makeRequestRSpec()
 
 # Creating the mongodb docker container
 mongo_db = request.DockerContainer("mongo_db")
+mongo_db.docker_extimage = "ubuntu:20.04"
 mongo_db.docker_ssh_style = "exec"
 mongo_db.docker_exec_shell = "/bin/bash"
 #mongo_db.docker_dockerfile = "https://github.com/AJMosley345/CSC468-Test/mongo_db/Dockerfile"
