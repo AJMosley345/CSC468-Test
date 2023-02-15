@@ -12,4 +12,11 @@ mongo_db.docker_dockerfile = "https://github.com/AJMosley345/CSC468-Test/mongo_d
 web_server = request.DockerContainer("web_server")
 web_server.docker_dockerfile = "https://github.com/AJMosley345/CSC468-Test/nginx/Dockerfile"
 
+# Creating a LAN to put the containers into
+lan = request.LAN("docker_lan")
+mongodb_iface = mongo_db.addInterface("if1")
+nginx_iface = web_server.addInterface("if1")
+lan.addInterface(mongodb_iface)
+lan.addInterface(nginx_iface)
+
 portal.context.printRequestRSpec()
