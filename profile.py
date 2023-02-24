@@ -13,14 +13,9 @@ node1.routable_control_ip = "true"
 
 # # Installs mysql
 node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt update"))
-node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y sudo apt install -y software-properties-common gnupg apt-transport-https ca-certificates mongodb"))
-node1.addService(rspec.Execute(shell="/bin/sh", command='wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -'))
-node1.addService(rspec.Execute(shell="/bin/sh", command='echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list'))
-node1.addService(rspec.Execute(shell="/bin/sh", command='sudo apt update'))
-node1.addService(rspec.Execute(shell="/bin/sh", command='sudo apt install -y mongodb-org'))
-node1.addService(rspec.Execute(shell="/bin/sh", command='sudo systemctl start mongod'))
-node1.addService(rspec.Execute(shell="/bin/sh", command='sudo systemctl status mongod'))
-
+node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y mysql-server"))
+node1.addService(rspec.Execute(shell="/bin/sh", command="sudo systemctl start mysql.service"))
+node1.addService(rspec.Execute(shell="/bin/sh", command="sudo bash /local/repositoy/setup_mysql.sh"))
 
 # Creating the nginx server
 node2 = request.XenVM("nginx-server")
