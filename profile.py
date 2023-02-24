@@ -15,7 +15,7 @@ node1.routable_control_ip = "true"
 node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt update"))
 node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y mysql-server"))
 node1.addService(rspec.Execute(shell="/bin/sh", command="sudo systemctl start mysql.service"))
-node1.addService(rspec.Execute(shell="/bin/sh", command="sudo bash /local/repositoy/setup_mysql.sh"))
+node1.addService(rspec.Execute(shell="/bin/sh", command="sudo bash /local/repository/setup_mysql.sh"))
 
 # Creating the nginx server
 node2 = request.XenVM("nginx-server")
