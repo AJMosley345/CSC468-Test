@@ -14,6 +14,11 @@ node1.routable_control_ip = "true"
 # Installs docker, then starts a mysql container
 node1.addService(rspec.Execute(shell="/bin/sh", command="sudo apt update"))
 node1.addService(rspec.Execute(shell="/bin/sh", command="sudo bash /local/repository/install_docker.sh"))
+<<<<<<< HEAD
+=======
+node1.addService(rspec.Execute(shell="/bin/sh", command="sudo bash /local/repository/mysql/docker-compose up"))
+
+>>>>>>> d3749a1 (Change everything)
 
 # Creating the nginx server
 # node2 = request.XenVM("nginx-server")
